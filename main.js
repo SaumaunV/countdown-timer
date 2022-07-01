@@ -2,22 +2,42 @@ const name = document.querySelector('.name');
 const date = document.querySelector('.date');
 const time = document.querySelector('.time');
 const beginButton = document.querySelector('.begin');
+const countdownSeconds = document.querySelector('.seconds');
+const countdownMinutes = document.querySelector('.minutes');
+const countdownHours = document.querySelector('.hours');
+const countdownDays = document.querySelector('.days');
+const formWrapper = document.querySelector('.form-wrapper');
+const countdownWrapper = document.querySelector('.countdown-wrapper');
 
-beginButton.addEventListener('click', makeCountdown);
+beginButton.addEventListener('click', startCountdown);
+
+var countdown;
 
 function makeCountdown() {
-    // Get the current date and time
-    currDate = new Date();
-    console.log(currDate);
-    // Subtract the current date and time from the inputted date and time
-        // ? If it's negative.... ? Do nothing + Display alert msg telling them to give a date in the future OR Display countdown ended message
-        // Specifically, convert date.value and time.value to UTC units. Date.UTC() will give us the milliseconds, to use as such: 
-        // Date.UTC(convertedValues) - currDate = milliseconds until event
+    let currDate = new Date();
+    let endDate = new Date(`${date.value} ${time.value}`);
+    let distance = endDate - currDate;
     
-    // Hide the input html elements
-    // Display the countdown elements (including button for setting a new countdown)
+    if(distance <= 0){
+        clearInterval(countdown);
+        alert('countdown finished');
+        formWrapper.style.visibility = "visible";
+        countdownWrapper.style.visibility = "hidden";
+        return;      
+    }
 
-    // Run interval function to display date inside relevant countdown html elements
-        // Units can be years, days, hours, minutes, seconds. Units that are zero (AND it is the current largest unit) are not displayed
-    setInterval(makeCountdown, 500);
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    countdownSeconds.innerHTML = `${seconds} seconds`;
+    countdownMinutes.innerHTML = `${minutes} minutes `;
+    countdownHours.innerHTML = `${hours} hours `;
+    countdownDays.innerHTML = `${days} days `;
+}
+
+function startCountdown(){
+    countdown = setInterval(makeCountdown, 1000);
+    formWrapper.style.visibility = "hidden";
+    countdownWrapper.style.visibility = "visible";
 }
