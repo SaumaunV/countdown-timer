@@ -9,21 +9,29 @@
   </head>
   <body>
     <div class="wrapper">
-      <div>
-        <div class="event-name">
-          <span>Event Name</span>
-          <input class="name" type="text" />
+      <div class="form-wrapper">
+        <div>
+          <div class="event-name">
+            <span>Event Name</span>
+            <input class="name" type="text" />
+          </div>
+          <div class="event-date">
+            <span>Event Date</span>
+            <input class="date" type="date" />
+          </div>
+          <div class="event-time">
+            <span>Event Time</span>
+            <input class="time" type="time" />
+          </div>
         </div>
-        <div class="event-date">
-          <span>Event Date</span>
-          <input class="date" type="date" />
-        </div>
-        <div class="event-time">
-          <span>Event Time</span>
-          <input class="time" type="time" />
-        </div>
+        <button class="begin">Begin Countdown</button>
       </div>
-      <button class="begin">Begin Countdown</button>
+    </div>
+    <div class="countdown-wrapper">
+      <span class="days"></span>
+      <span class="hours"></span>
+      <span class="minutes"></span>
+      <span class="seconds"></span>
     </div>
     <script src="main.js"></script>
   </body>
