@@ -30,10 +30,11 @@ function makeCountdown() {
     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    countdownSeconds.innerHTML = `${seconds} seconds`;
-    countdownMinutes.innerHTML = `${minutes} minutes `;
-    countdownHours.innerHTML = `${hours} hours `;
-    countdownDays.innerHTML = `${days} days `;
+    
+    countdownDays.innerHTML = days === 0 ? '' : `${days} days `;
+    countdownHours.innerHTML = countdownDays.innerHTML === '' && hours === 0 ? '' : `${hours} hours `;
+    countdownMinutes.innerHTML = countdownHours.innerHTML === '' && minutes === 0 ? '' : `${minutes} minutes `;
+    countdownSeconds.innerHTML = countdownMinutes.innerHTML === '' && seconds === 0 ? 'Countdown Finished' : `${seconds} seconds`;
 }
 
 function startCountdown(){
