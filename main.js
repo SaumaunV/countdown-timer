@@ -7,7 +7,9 @@ const countdownMinutes = document.querySelector('.minutes');
 const countdownHours = document.querySelector('.hours');
 const countdownDays = document.querySelector('.days');
 const formWrapper = document.querySelector('.form-wrapper');
+const eventName = document.querySelector('.event-name');
 const countdownWrapper = document.querySelector('.countdown-wrapper');
+
 
 beginButton.addEventListener('click', startCountdown);
 
@@ -22,6 +24,7 @@ function makeCountdown() {
         clearInterval(countdown);
         alert('countdown finished');
         formWrapper.style.visibility = "visible";
+        eventName.innerHTML = '';
         countdownWrapper.style.visibility = "hidden";
         return;      
     }
@@ -40,5 +43,6 @@ function makeCountdown() {
 function startCountdown(){
     countdown = setInterval(makeCountdown, 1000);
     formWrapper.style.visibility = "hidden";
+    eventName.innerHTML = name.value;
     countdownWrapper.style.visibility = "visible";
 }
